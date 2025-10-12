@@ -1,0 +1,22 @@
+# Archivos de entorno virtual - Son específicos de cada máquina y se recrean
+# a partir de requirements.txt, por lo que nunca deben subirse.
+venv/
+env/
+
+# Archivos de entorno con datos sensibles (contraseñas, claves secretas, etc.)
+# ¡ESTA ES LA REGLA MÁS IMPORTANTE!
+.env
+
+# Archivos compilados y caché de Python
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+
+# Carpetas de configuración de IDEs
+.vscode/
+.idea/
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
