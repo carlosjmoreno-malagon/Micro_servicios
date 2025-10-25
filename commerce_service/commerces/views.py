@@ -10,14 +10,18 @@ class CommerceListCreateView(generics.ListCreateAPIView):
     """
     queryset = Commerce.objects.all()
     serializer_class = CommerceSerializer
-    # Solo los usuarios que presenten un token JWT válido podrán acceder.
     permission_classes = [permissions.IsAuthenticated]
 
     def perform_create(self, serializer):
-        """
-        Sobrescribimos este método para asignar automáticamente el
-        ID del usuario autenticado como el 'owner_id' del nuevo comercio.
-        """
-        # request.user.id está disponible gracias a que simplejwt decodificó
-        # el token y nos dio el ID del usuario.
+        """Asigna automáticamente el ID del usuario como el dueño del comercio."""
         serializer.save(owner_id=self.request.user.id)
+
+# --- CÓDIGO A VERIFICAR / AÑADIR ---
+class CommerceDetailView(generics.RetrieveAPIView):
+    """
+    Vista para obtener los detalles de un solo comercio por su ID.
+    Este es el endpoint que el servicio de productos consultará.
+    """
+    queryset = Commerce.objects.all()
+    serializer_class = CommerceSerializer
+    permission_classes = [permissions.IsAuthenticated]
